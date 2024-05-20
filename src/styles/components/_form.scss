@@ -1,0 +1,65 @@
+.form {
+  max-width: 350px;
+
+  &__input {
+    position: relative;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      font-size: 18px;
+      opacity: 0.5;
+    }
+
+    &__label {
+      position: absolute;
+      top: 50%;
+      left: 50px;
+      transform: translateY(-50%);
+      pointer-events: none;
+      transition: all 0.2s ease-in-out;
+      color: $color-tertiary-shade;
+    }
+
+    &__box {
+      display: block;
+      width: 100%;
+      height: 80px;
+      background: $color-secondary-shade;
+      border: none;
+      margin: 10px 0px;
+      border-radius: 20px;
+      padding-left: 50px;
+      padding-right: 10px;
+
+      &:focus,
+      &:not(:placeholder-shown) {
+        + label {
+          transform-origin: left;
+          transform: translateY(-150%) scale(0.85);
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  &__submit {
+    background: $color-accent;
+    color: $color-light-white;
+    display: block;
+    width: 100%;
+    height: 80px;
+    margin: 10px 0px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: $font-size-regular;
+
+    &:hover {
+      background: $color-accent-hover;
+      transition: background 0.2s ease;
+    }
+  }
+}
