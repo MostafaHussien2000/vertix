@@ -1,12 +1,13 @@
 /* Helpers
 ========== */
-@import './helpers/variables';
-@import './helpers/resets';
+@import "./helpers/variables";
+@import "./helpers/resets";
 
 /* Pages
 ======== */
-@import './pages/login';
+@import "./pages/login";
+@import "./pages/sign-up";
 
 /* Components
 ============= */
-@import "./components/form"
+@import "./components/form";

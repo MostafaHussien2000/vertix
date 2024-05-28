@@ -50,7 +50,8 @@ function LoginPage() {
           </button>
         </form>
         <p className="login-page__link">
-          <span>You don't have an account ?</span> <Link>Create new one.</Link>
+          <span>You don't have an account ?</span>{" "}
+          <Link to={"/signup"}>Create new one.</Link>
         </p>
       </center>
     </main>
