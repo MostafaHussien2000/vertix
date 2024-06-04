@@ -9,6 +9,7 @@ import {
 import {
   TbHome,
   TbLogout,
+  TbPlus,
   TbSettings2,
   TbStarFilled,
   TbVideo,
@@ -16,7 +17,6 @@ import {
 import Loader from "../components/Loader";
 
 function FeedPage() {
-  const NUMBER_OF_FEATURED_MOVIES = 3;
   const [movies, setMovies] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -41,6 +41,32 @@ function FeedPage() {
     email: "john@mail.com",
     profilePic:
       "https://th.bing.com/th/id/OIP.4A2g1d0ruPQwtDlpBl5OuQHaHZ?rs=1&pid=ImgDetMain",
+  };
+
+  // Carousel Functionality
+  const NUMBER_OF_CAROUSEL_SLIDES = 4;
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handelCircleClick = (e) => {
+    const circleIndex = e.target.getAttribute("data-index");
+    const carousel = document.querySelector(
+      ".feed-page__main-content__featured__carousel"
+    );
+    const slides = carousel.querySelectorAll(
+      ".feed-page__main-content__featured__movie"
+    );
+
+    // Toggle class name
+    const circles = document.querySelectorAll(
+      ".feed-page__main-content__featured__carousel-indicators__circle"
+    );
+    Array.from(circles).forEach((circle) => {
+      circle.classList.remove("active");
+    });
+    e.target.classList.add("active");
+
+    // Moving carousel
+    carousel.style.left = `${-1 * 100 * circleIndex}%`;
   };
 
   return (
@@ -83,22 +109,59 @@ function FeedPage() {
         ) : movies ? (
           <>
             <div className="feed-page__main-content__featured">
-              {movies?.nowPlaying
-                ?.slice(0, NUMBER_OF_FEATURED_MOVIES)
-                .map((movie) => (
-                  <li key={movie.id}>
-                    <img src={`${getImagesURL()}/${movie.backdrop_path}`} />
-                    <span>{movie.original_title}</span>
-                  </li>
-                ))}
+              <div className="feed-page__main-content__featured__carousel">
+                {movies?.nowPlaying
+                  ?.slice(0, NUMBER_OF_CAROUSEL_SLIDES)
+                  .map((movie, index) => (
+                    <div
+                      className="feed-page__main-content__featured__movie"
+                      key={movie.id}
+                      style={{
+                        left: `${100 * index}%`,
+                      }}
+                    >
+                      <div className="feed-page__main-content__featured__movie__content">
+                        <img
+                          className="feed-page__main-content__featured__movie__banner"
+                          src={`${getImagesURL()}/${movie.backdrop_path}`}
+                        />
+                        <div className="feed-page__main-content__featured__movie__info">
+                          <h3>{movie.original_title}</h3>
+                          <div className="feed-page__main-content__featured__movie__actions">
+                            <button className="feed-page__main-content__featured__movie__actions__details">
+                              View Details
+                            </button>
+                            <button className="feed-page__main-content__featured__movie__actions__list">
+                              <TbPlus />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+              <div className="feed-page__main-content__featured__carousel-indicators">
+                {Array(NUMBER_OF_CAROUSEL_SLIDES)
+                  .fill(0)
+                  .map((_, index) => (
+                    <span
+                      key={index}
+                      className={`feed-page__main-content__featured__carousel-indicators__circle ${
+                        index === 0 ? "active" : ""
+                      }`}
+                      data-index={index}
+                      onClick={handelCircleClick}
+                    ></span>
+                  ))}
+              </div>
             </div>
             <div className="feed-page__main-content__popular">
               <h1>Popular Movies</h1>
               <ul>
                 {movies?.nowPlaying
                   ?.slice(
-                    NUMBER_OF_FEATURED_MOVIES,
-                    NUMBER_OF_FEATURED_MOVIES + 4
+                    NUMBER_OF_CAROUSEL_SLIDES,
+                    NUMBER_OF_CAROUSEL_SLIDES + 4
                   )
                   .map((movie) => (
                     <li

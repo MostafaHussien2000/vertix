@@ -46,6 +46,126 @@
   }
 
   &__main-content {
+    &__featured {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background-color: red;
+      border-radius: 40px;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: rgb(0, 0, 0);
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.8823178929775035) 100%
+        );
+        top: 0px;
+        left: 0px;
+        z-index: 2;
+      }
+
+      $movies-count: 4;
+
+      &__carousel {
+        position: absolute;
+        width: 100% * $movies-count;
+        height: 100%;
+        display: flex;
+        transition: left 0.5s ease;
+      }
+      &__movie {
+        &__content {
+          width: 100%;
+          height: 100%;
+          position: relative;
+        }
+
+        &__banner {
+          height: 100%;
+          object-fit: cover;
+        }
+
+        &__info {
+          position: absolute;
+          bottom: 50px;
+          left: 50px;
+          z-index: 4;
+
+          h3 {
+            font-size: $font-size-mid;
+            font-weight: $font-weight-semibold;
+            margin-bottom: 15px;
+          }
+        }
+        &__actions {
+          display: flex;
+          gap: 10px;
+
+          button {
+            height: 60px;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          &__details {
+            background-color: $color-accent;
+            font-size: $font-size-regular;
+            padding: 0px 25px;
+            transition: background 0.2s ease;
+            &:hover {
+              background-color: $color-accent-hover;
+            }
+          }
+          &__list {
+            background-color: #ffffff28;
+            backdrop-filter: blur(4px);
+            width: 60px;
+            font-size: $font-size-mid;
+            font-weight: $font-weight-semibold;
+          }
+        }
+      }
+
+      &__carousel-indicators {
+        position: absolute;
+        display: flex;
+        gap: 5px;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 4;
+
+        &__circle {
+          display: block;
+          width: 10px;
+          height: 10px;
+          background-color: $color-light-white;
+          opacity: 0.5;
+          border-radius: 20px;
+          transition: width 0.2s ease;
+          cursor: pointer;
+
+          &.active {
+            opacity: 1;
+            width: 25px;
+            cursor: auto;
+          }
+        }
+      }
+    }
+
     &__popular {
       margin-top: 20px;
       h1 {
