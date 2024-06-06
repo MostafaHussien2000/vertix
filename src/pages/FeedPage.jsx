@@ -177,8 +177,7 @@ function FeedPage() {
                       </h5>
                       <p className="feed-page__main-content__popular__movie-card__rate">
                         <TbStarFilled />
-
-                        <span>{movie.vote_average}</span>
+                        <span>{movie.vote_average.toFixed(1)}</span>
                       </p>
                     </li>
                   ))}

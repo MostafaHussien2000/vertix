@@ -1,7 +1,7 @@
 .feed-page {
   display: grid;
-  grid-template-columns: 250px 1fr 200px;
-  gap: 5px;
+  grid-template-columns: 250px 1fr 350px;
+  gap: 20px;
 
   &__side-nav {
     display: grid;
@@ -46,10 +46,11 @@
   }
 
   &__main-content {
+    padding: 30px 0px;
     &__featured {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 16 / 7;
       background-color: red;
       border-radius: 40px;
       overflow: hidden;
@@ -64,7 +65,7 @@
         background: linear-gradient(
           180deg,
           rgba(0, 0, 0, 0) 0%,
-          rgba(0, 0, 0, 0.8823178929775035) 100%
+          $color-primary-shade 100%
         );
         top: 0px;
         left: 0px;
@@ -81,13 +82,14 @@
         transition: left 0.5s ease;
       }
       &__movie {
+        width: 100%;
         &__content {
-          width: 100%;
           height: 100%;
           position: relative;
         }
 
         &__banner {
+          width: 100%;
           height: 100%;
           object-fit: cover;
         }
