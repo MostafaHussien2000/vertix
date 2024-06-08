@@ -1,0 +1,202 @@
+.landing-page {
+  &__nav {
+    width: 85%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    padding: 10px 0;
+    z-index: 5;
+
+    &__logo {
+      width: 40px;
+      height: 40px;
+
+      img {
+        object-fit: contain;
+      }
+    }
+
+  }
+
+  &__header {
+    height: 100svh;
+    width: 100vw;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: rgb(26, 25, 30);
+        background: linear-gradient(
+                        180deg,
+                        rgba(26, 25, 30, 0.7058473047422094) 0%,
+                        rgba(0, 0, 0, 0.22405458765537467) 60%,
+                        rgba(26, 25, 30, 1) 95%
+        );
+        top: 0px;
+        left: 0px;
+        backdrop-filter: blur(2px);
+        z-index: -1;
+      }
+
+    &__banner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+
+    }
+
+    &__text {
+      text-align: center;
+      padding-top: 200px;
+      margin-bottom: 70px;
+    }
+
+    &__actions {
+      &__add {
+        padding: 20px 30px;
+        border: none;
+        border-radius: 18px;
+        background: $color-accent;
+        transition: background 0.2s ease;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin: auto;
+
+        &:hover {
+          background: $color-accent-hover;
+        }
+      }
+    }
+
+    &__learn-more {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform-origin: center;
+      transform: translateX(-50%) rotate(90deg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      cursor: pointer;
+    }
+  }
+
+  &__why-us {
+    margin-top: 50px;
+    padding: 30px 0px;
+
+    &__container {
+      width: 85%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    &__text {
+      max-width: 400px;
+      h1 {
+        font-weight: $font-weight-bold;
+        font-size: $font-size-large;
+        span {
+          color: $color-accent;
+        }
+      }
+      p {
+        font-weight: $font-weight-regular;
+        font-size: $font-size-regular;
+        //opacity: 0.6;
+        color: $color-tertiary-shade;
+        filter: brightness(1.2);
+        &::selection {
+          filter: brightness(0.8);
+        }
+        margin-top: 20px;
+      }
+    }
+
+    &__features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+
+      &__box {
+        user-select: none;
+        width: 200px;
+        min-height: 200px;
+        background: $color-skeleton-primary-shade;
+        padding: 40px 15px 15px 15px;
+        border-radius: 25px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        gap: 15px;
+        transition: all 0.2s ease;
+        border: 2px solid transparent;
+        text-align: center;
+
+        > *  {
+          transition: all 0.2s ease
+        }
+
+        &:not(.action):hover {
+          border-color: $color-accent;
+
+          h4 {
+            color: $color-accent;
+          }
+
+          svg {
+            stroke: $color-accent;
+          }
+
+          &:nth-of-type(3) {
+            svg {
+              fill: $color-accent;
+            }
+          }
+        }
+
+        &.action{
+          background: $color-accent;
+          justify-content: center;
+          cursor: pointer;
+          padding: 15px;
+          &:hover {
+            background: $color-accent-hover;
+          }
+        }
+
+        svg {
+          font-size: $font-size-large;
+        }
+        h4 {
+          font-weight: $font-weight-medium;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    width: 100%;
+    margin-top: 20px;
+    background: $color-skeleton-primary-shade;
+    text-align: center;
+    padding: 20px 0px;
+  }
+}
