@@ -1,11 +1,46 @@
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import logo from "../static/logo.png";
 
 /* Icons
 ======== */
 import { HiOutlineKey, HiOutlineMail } from "react-icons/hi";
+import {useAuth} from "../context/AuthContext";
+import {useEffect, useState} from "react";
+import RequestLoader from "../components/RequestLoader";
 
 function LoginPage() {
+  const {login, currentUser} = useAuth()
+
+
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (currentUser) navigate("/feed")
+  }, []);
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+
+    setError("")
+    setLoading(true)
+    const logData = {
+      email: e.target[0].value,
+      password: e.target[1].value
+    }
+
+    try {
+      await login(logData.email, logData.password)
+      setLoading()
+      setError("")
+      navigate("/feed")
+    } catch(err) {
+      console.error(err)
+      setError("Something went wrong.")
+      setLoading(false)
+    }
+  }
   return (
     <main className="login-page">
       <center className="login-page__container">
@@ -15,7 +50,7 @@ function LoginPage() {
             Hello Again, from <span>Vertix</span>
           </h1>
         </header>
-        <form className="login-page__form form" action="">
+        <form onSubmit={handleLogin} className="login-page__form form">
           <h4>Login</h4>
           <div className="form__input">
             <input
@@ -45,8 +80,10 @@ function LoginPage() {
             </label>
             <HiOutlineKey />
           </div>
-          <button className="form__submit" type="button">
-            Login
+          {error && <p className={"error-msg"}>{error}</p>}
+          <button className={`form__submit ${loading?"requesting" : ""}`} type="submit">
+            {loading ? <RequestLoader /> : <></>}
+            {loading ? "Logging you in" : "Login"}
           </button>
         </form>
         <p className="login-page__link">

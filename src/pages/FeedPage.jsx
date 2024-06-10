@@ -15,11 +15,14 @@ import {
   TbVideo,
 } from "react-icons/tb";
 import Loader from "../components/Loader";
+import { useAuth } from "../context/AuthContext";
 
 function FeedPage() {
   const [movies, setMovies] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const {currentUser, logout} = useAuth()
 
   useEffect(() => {
     fetch(nowPlayingMoviesURL())
@@ -36,16 +39,8 @@ function FeedPage() {
       });
   }, []);
 
-  const userDate = {
-    userName: "John Doe",
-    email: "john@mail.com",
-    profilePic:
-      "https://th.bing.com/th/id/OIP.4A2g1d0ruPQwtDlpBl5OuQHaHZ?rs=1&pid=ImgDetMain",
-  };
-
   // Carousel Functionality
   const NUMBER_OF_CAROUSEL_SLIDES = 4;
-  const [currentSlide, setCurrentSlide] = useState(0);
 
   const handelCircleClick = (e) => {
     const circleIndex = e.target.getAttribute("data-index");
@@ -69,6 +64,17 @@ function FeedPage() {
     carousel.style.left = `${-1 * 100 * circleIndex}%`;
   };
 
+  const [logoutError, setLogoutError] = useState("")
+  const handleLogout = async () => {
+    setLogoutError("")
+    try {
+      await logout()
+      console.log(currentUser)
+    } catch(err) {
+      setLogoutError("Something wrong happened!")
+      console.error(err)
+    }
+  }
   return (
     <main className="feed-page">
       <aside className="feed-page__side-nav">
@@ -92,7 +98,7 @@ function FeedPage() {
               <TbSettings2 />
               <span>Settings</span>
             </li>
-            <li>
+            <li onClick={handleLogout}>
               <TbLogout />
               <span>Logout</span>
             </li>

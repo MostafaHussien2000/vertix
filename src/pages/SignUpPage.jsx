@@ -1,20 +1,35 @@
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import logo from "../static/logo.png";
 
-import { useState } from "react";
+import {useEffect, useRef, useState} from "react";
 
 /* Firebase
 =========== */
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase.config";
+import {useAuth} from "../context/AuthContext"
 
 /* Icons
 ======== */
 import { HiOutlineUser, HiOutlineKey, HiOutlineMail } from "react-icons/hi";
 import { BsCheck2All } from "react-icons/bs";
+import RequestLoader from "../components/RequestLoader";
 
 function SignUpPage() {
-  const handleCreateUserAccount = (e) => {
+
+  const [logError, setLogError] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
+
+  const {signup, currentUser, setCurrentUser} = useAuth()
+
+  useEffect(() => {
+    if (currentUser) navigate("/feed")
+  }, [currentUser])
+
+
+  const handleCreateUserAccount = async (e) => {
     e.preventDefault();
     const userData = {
       fullName: e.target[0].value,
@@ -22,17 +37,21 @@ function SignUpPage() {
       password: e.target[2].value,
       confirmPassword: e.target[3].value,
     };
+    if (userData.password !== userData.confirmPassword) return setLogError("Passwords does not match!");
 
-    if (userData.password === userData.confirmPassword)
-      createUserWithEmailAndPassword(auth, userData.email, userData.password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        });
+    try {
+      setLoading(true)
+      setLogError("")
+      await signup(userData.fullName, userData.email, userData.password, "")
+      navigate("/feed");
+    } catch(err) {
+      setLoading(false)
+      console.error(err)
+      setLogError("Failed to create your account. Try submitting the form again!")
+    }
+
+    setLoading(false)
+
   };
 
   const [checkers, setCheckers] = useState({
@@ -144,8 +163,10 @@ function SignUpPage() {
             </label>
             <HiOutlineKey />
           </div>
-          <button className="form__submit" type="submit">
-            Create Account
+          {logError && <p className={"error-msg"}>{logError}</p>}
+          <button className={`form__submit ${loading?"requesting" : ""}`} type="submit">
+            {loading ? <RequestLoader /> : <></>}
+            {loading ? "Creating" : "Create"} Account
           </button>
         </form>
         <p className="sign-up-page__link">
