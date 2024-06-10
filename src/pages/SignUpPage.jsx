@@ -13,6 +13,7 @@ import {useAuth} from "../context/AuthContext"
 ======== */
 import { HiOutlineUser, HiOutlineKey, HiOutlineMail } from "react-icons/hi";
 import { BsCheck2All } from "react-icons/bs";
+import { MdError } from "react-icons/md";
 import RequestLoader from "../components/RequestLoader";
 
 function SignUpPage() {
@@ -49,9 +50,7 @@ function SignUpPage() {
       console.error(err)
       setLogError("Failed to create your account. Try submitting the form again!")
     }
-
     setLoading(false)
-
   };
 
   const [checkers, setCheckers] = useState({
@@ -163,7 +162,7 @@ function SignUpPage() {
             </label>
             <HiOutlineKey />
           </div>
-          {logError && <p className={"error-msg"}>{logError}</p>}
+          {logError && <p className={"error-msg"}><MdError /> {logError}</p>}
           <button className={`form__submit ${loading?"requesting" : ""}`} type="submit">
             {loading ? <RequestLoader /> : <></>}
             {loading ? "Creating" : "Create"} Account

@@ -82,4 +82,20 @@
     }
 
   }
+    .error-msg {
+      color: $color-light-white;
+      fill: $color-light-white;
+      background: rgba(216, 4, 42, 0.37);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 3px;
+      padding: 2px;
+      border-radius: 4px;
+      text-align: left;
+
+      svg {
+        min-width: 20px;
+      }
+    }
 }
