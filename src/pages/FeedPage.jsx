@@ -16,6 +16,8 @@ import {
 } from "react-icons/tb";
 import Loader from "../components/Loader";
 import { useAuth } from "../context/AuthContext";
+import {Link} from "react-router-dom";
+import MovieCard from "../components/MovieCard";
 
 function FeedPage() {
   const [movies, setMovies] = useState({});
@@ -170,28 +172,13 @@ function FeedPage() {
                     NUMBER_OF_CAROUSEL_SLIDES + 4
                   )
                   .map((movie) => (
-                    <li
-                      className="feed-page__main-content__popular__movie-card"
-                      key={movie.id}
-                    >
-                      <img
-                        className="feed-page__main-content__popular__movie-card__poster"
-                        src={`${getImagesURL()}/${movie.poster_path}`}
-                      />
-                      <h5 className="feed-page__main-content__popular__movie-card__name">
-                        {movie.original_title}
-                      </h5>
-                      <p className="feed-page__main-content__popular__movie-card__rate">
-                        <TbStarFilled />
-                        <span>{movie.vote_average.toFixed(1)}</span>
-                      </p>
-                    </li>
+                      <MovieCard key={movie.id} movie={movie} />
                   ))}
               </ul>
             </div>
           </>
         ) : (
-          <p>No data found</p>
+          <p>No data found.</p>
         )}
       </section>
       <aside className="feed-page__side-content"></aside>

@@ -5,10 +5,12 @@ import {
   movieRecommendationsURL,
   options,
 } from "../api/api";
-import { TbPlus, TbStarFilled } from "react-icons/tb";
+import {TbArrowNarrowLeft, TbPlus, TbStarFilled} from "react-icons/tb";
 import { FaImdb } from "react-icons/fa";
 import { PiTimerBold } from "react-icons/pi";
 import Loader from "../components/Loader";
+import {Link, useParams} from "react-router-dom";
+import MovieCard from "../components/MovieCard";
 
 function MoviePage() {
   // Test Movie ID: 882059
@@ -20,16 +22,19 @@ function MoviePage() {
   const [loadRecom, setLoadRecom] = useState(true);
   const [errorRecom, setErrorRecom] = useState(false);
 
-  const MOVIE_ID = 998846;
+  const [loadingBackdropImage, setLoadingBackdropImage] = useState(true)
+
+
+  const {id: movieId} = useParams()
 
   useEffect(() => {
-    fetch(findMovieURL(MOVIE_ID), options())
+    fetch(findMovieURL(movieId), options())
       .then((response) => response.json())
       .then((data) => {
         setMovie(data);
       })
       .then(() => {
-        fetch(movieRecommendationsURL(MOVIE_ID), options())
+        fetch(movieRecommendationsURL(movieId), options())
           .then((response) => response.json())
           .then((data) => {
             setRecommendations(data.results.slice(0, 8));
@@ -47,19 +52,29 @@ function MoviePage() {
       .finally(() => {
         setLoading(false);
       });
-  }, [MOVIE_ID]);
+  }, [movieId, movie]);
 
-  if (loading) return <PageSkeleton />;
+  if (loading && loadingBackdropImage) return <PageSkeleton />;
 
   if (error) return <p>Something went wrong!</p>;
 
   return (
     <main className="movie-page">
-      <div className="movie-page__header">
+      <header className="movie-page__header">
+        <Link to={"/feed"} className={"movie-page__header__go-back"}>
+          <div className={"movie-page__header__go-back__icon"}><TbArrowNarrowLeft /></div>
+          <p className={"movie-page__header__go-back__text"}>Back to feed</p>
+        </Link>
         <div className="movie-page__header__banner">
           <img
             src={`${getImagesURL("original")}/${movie.backdrop_path}`}
             alt=""
+            loading={"lazy"}
+            onLoad={() => {
+              console.log("Banner is fully loaded!")
+              setLoadingBackdropImage(false)
+            }}
+            style={{display: loadingBackdropImage ? "none" : "block"}}
           />
         </div>
         <div className="movie-page__header__movie">
@@ -104,7 +119,7 @@ function MoviePage() {
             </div>
           </div>
         </div>
-      </div>
+      </header>
       <div className="movie-page__container">
         <section className="movie-page__brought-by">
           <h1>Brought to you by</h1>
@@ -138,22 +153,7 @@ function MoviePage() {
           ) : recommendations.length > 0 ? (
             <ul className="movie-page__similar-movies__list">
               {recommendations.map((movie) => (
-                <li
-                  className="movie-page__similar-movies__list__movie-card"
-                  key={movie.id}
-                >
-                  <img
-                    className="movie-page__similar-movies__list__movie-card__poster"
-                    src={`${getImagesURL()}/${movie.poster_path}`}
-                  />
-                  <h5 className="movie-page__similar-movies__list__movie-card__name">
-                    {movie.original_title}
-                  </h5>
-                  <p className="movie-page__similar-movies__list__movie-card__rate">
-                    <TbStarFilled />
-                    <span>{movie.vote_average.toFixed(1)}</span>
-                  </p>
-                </li>
+                <MovieCard key={movie.id} movie={movie} reset={{movie:setMovie, loading: setLoading,error: setError, backdrop: setLoadingBackdropImage}} />
               ))}
             </ul>
           ) : (

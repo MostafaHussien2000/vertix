@@ -1,0 +1,33 @@
+.movie-card {
+  &__poster {
+    border-radius: 15px;
+    cursor: pointer;
+  }
+
+  &__name {
+    cursor: pointer;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; /* Number of lines to show */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: $font-size-regular;
+    font-weight: $font-weight-medium;
+    margin-top: 5px;
+  }
+
+  &__rate {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+
+    svg {
+      fill: $color-rate;
+    }
+
+    span {
+      color: $color-tertiary-shade;
+    }
+  }
+}
