@@ -20,11 +20,11 @@ function MovieCard({movie, reset}) {
         <li className={"movie-card"}>
             <img
                 className={"movie-card__poster"}
-                alt={`${movie?.original_title} poster`}
+                alt={`${movie?.original_title || movie?.name} poster`}
                 src={`${getImagesURL()}/${movie?.poster_path}`}
             />
             <Link title={movie?.original_title} onClick={resetMovie} to={`/movie/${movie.id}`} className="movie-card__name">
-                {movie?.original_title}
+                {movie?.original_title || movie?.name}
             </Link>
             <p className="movie-card__rate">
                 <TbStarFilled/>

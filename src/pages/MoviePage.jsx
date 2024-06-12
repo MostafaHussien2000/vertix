@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  findMovieURL,
+  getMovieDataURL,
   getImagesURL,
   movieRecommendationsURL,
   options,
@@ -28,7 +28,7 @@ function MoviePage() {
   const {id: movieId} = useParams()
 
   useEffect(() => {
-    fetch(findMovieURL(movieId), options())
+    fetch(getMovieDataURL(movieId), options())
       .then((response) => response.json())
       .then((data) => {
         setMovie(data);
