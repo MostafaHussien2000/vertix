@@ -20,14 +20,14 @@ import {Link} from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import {getListsItems} from "../api/fetchData";
 import ErrorMessage from "../components/ErrorMessage";
+import {FiSearch} from "react-icons/fi";
+import Modal from "../components/Modal";
+import Search from "../components/Search";
 
 function FeedPage() {
 
   // Constants
   const NUMBER_OF_CAROUSEL_SLIDES = 4;
-
-
-
   /* Current Feed
      .  0  => Movies
      .  1  => TV Series
@@ -89,6 +89,10 @@ function FeedPage() {
     }
   }
 
+  // Search Modal
+  const [modal, viewModal] = useState(false);
+
+
   return (
     <main className="feed-page">
       <aside className="feed-page__side-nav">
@@ -120,19 +124,19 @@ function FeedPage() {
         </div>
       </aside>
       <section className="feed-page__main-content">
-        <div className={"feed-page__main-content__heading"}>
+        {
+          modal ? <Modal view={viewModal}><Search /></Modal> : <></>
+        }
+        <header className={"feed-page__main-content__header"}>
           <ul className={"feed-page__main-content__navigation"}>
             <li onClick={() => setCurrentFeed(0)} className={`feed-page__main-content__navigation__link ${currentFeed === 0 ? "active" : "" }`}>Movies</li>
             <li onClick={() => setCurrentFeed(1)} className={`feed-page__main-content__navigation__link ${currentFeed === 1 ? "active" : "" }`}>TV Series</li>
           </ul>
 
-          <input
-              placeholder={"Search for Movies, Series, or People ..."}
-              className={"feed-page__main-content__search__box"}
-              type={"text"}
-              name={"search"}
-          />
-        </div>
+          <div className={"feed-page__main-content__search"}>
+            <FiSearch onClick={() => viewModal(true)} />
+          </div>
+        </header>
         <div className={"feed-page__main-content__featured"}>
           {
             loadingNowPlaying ? <Loader/> :

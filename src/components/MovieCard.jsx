@@ -18,13 +18,15 @@ function MovieCard({movie, reset}) {
 
     return (
         <li className={"movie-card"}>
-            <img
-                className={"movie-card__poster"}
-                alt={`${movie?.original_title || movie?.name} poster`}
-                src={`${getImagesURL()}/${movie?.poster_path}`}
-            />
-            <Link title={movie?.original_title} onClick={resetMovie} to={`/movie/${movie.id}`} className="movie-card__name">
-                {movie?.original_title || movie?.name}
+            <div className={"movie-card__poster"}>
+                <img
+                    className={"movie-card__poster__img"}
+                    alt={`${movie?.original_title || movie?.name} poster`}
+                    src={`${getImagesURL()}/${movie?.poster_path}`}
+                />
+            </div>
+            <Link title={movie?.title} onClick={resetMovie} to={`/movie/${movie.id}`} className="movie-card__name">
+                {movie?.title || movie?.name}
             </Link>
             <p className="movie-card__rate">
                 <TbStarFilled/>

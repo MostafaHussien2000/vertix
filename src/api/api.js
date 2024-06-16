@@ -38,3 +38,8 @@ export const getMovieDataURL = (movieId) =>
 export const popularSeriesURL = (page = 1) => `${API_URL}/3/tv/popular?language=en-US&page=${page}`
 export const topRatedSeriesURL = (page = 1) => `${API_URL}/3/tv/top_rated?language=en-US&page=${page}`
 export const onTheAirSeriesURL = (page = 1) => `${API_URL}/3/tv/on_the_air?language=en-US&page=${page}`
+
+
+/* Search URLs
+============== */
+export const multiSearch = (category="multi", query="", page = 1) => `${API_URL}/3/search/${category}?query=${query}&include_adult=false&language=en-US&page=${page}`

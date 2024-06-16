@@ -66,6 +66,7 @@
       }
     }
   }
+
   &__container {
     width: 80%;
     margin: auto;
@@ -123,6 +124,15 @@
 
     &__banner {
       user-select: none;
+      min-height: 80svh;
+      max-height: 100vh;
+      overflow: hidden;
+
+      img {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+      }
     }
 
     &__movie {

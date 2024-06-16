@@ -1,0 +1,21 @@
+.modal {
+  position: absolute;
+  width: 100vw;
+  height: 100svh;
+  background: rgba(14, 13, 16, 0.07);
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 7;
+  backdrop-filter: blur(2px);
+
+  &__container {
+    width: 80%;
+    max-width: 900px;
+    min-width: 350px;
+    background: $color-skeleton-primary-shade;
+    margin: 40px auto;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+}

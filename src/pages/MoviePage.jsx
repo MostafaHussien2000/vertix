@@ -52,7 +52,7 @@ function MoviePage() {
       .finally(() => {
         setLoading(false);
       });
-  }, [movieId, movie]);
+  }, [movieId]);
 
   if (loading && loadingBackdropImage) return <PageSkeleton />;
 
