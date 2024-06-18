@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import React from "react";
 import {TbStarFilled} from "react-icons/tb";
 
-function MovieCard({movie, reset}) {
+function MultiItemsCard({movie, reset}) {
     const resetMovie = () => {
         if (reset) {
             reset.movie({})
@@ -36,4 +36,4 @@ function MovieCard({movie, reset}) {
     )
 }
 
-export default MovieCard
+export default MultiItemsCard
