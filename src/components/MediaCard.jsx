@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import React from "react";
 import {TbStarFilled} from "react-icons/tb";
 
-function MultiItemsCard({movie, reset}) {
+function MediaCard({mediaType, movie, reset}) {
     const resetMovie = () => {
         if (reset) {
             reset.movie({})
@@ -25,7 +25,7 @@ function MultiItemsCard({movie, reset}) {
                     src={`${getImagesURL()}/${movie?.poster_path}`}
                 />
             </div>
-            <Link title={movie?.title} onClick={resetMovie} to={`/movie/${movie.id}`} className="movie-card__name">
+            <Link title={movie?.title} onClick={resetMovie} to={`/${mediaType}/${movie.id}`} className="movie-card__name">
                 {movie?.title || movie?.name}
             </Link>
             <p className="movie-card__rate">
@@ -36,4 +36,4 @@ function MultiItemsCard({movie, reset}) {
     )
 }
 
-export default MultiItemsCard
+export default MediaCard

@@ -68,7 +68,7 @@
   }
 
   &__container {
-    width: 80%;
+    width: 85%;
     margin: auto;
     max-width: 2000px;
     min-width: 350px;
@@ -125,7 +125,7 @@
     &__banner {
       user-select: none;
       min-height: 80svh;
-      max-height: 100vh;
+      max-height: 90svh;
       overflow: hidden;
 
       img {

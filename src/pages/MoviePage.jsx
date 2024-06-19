@@ -10,7 +10,7 @@ import { FaImdb } from "react-icons/fa";
 import { PiTimerBold } from "react-icons/pi";
 import Loader from "../components/Loader";
 import {Link, useParams} from "react-router-dom";
-import MovieCard from "../components/MovieCard";
+import MediaCard from "../components/MediaCard";
 
 function MoviePage() {
   // Test Movie ID: 882059
@@ -52,7 +52,7 @@ function MoviePage() {
       .finally(() => {
         setLoading(false);
       });
-  }, [movieId]);
+  }, [movieId, loadingBackdropImage]);
 
   if (loading && loadingBackdropImage) return <PageSkeleton />;
 
@@ -68,13 +68,7 @@ function MoviePage() {
         <div className="movie-page__header__banner">
           <img
             src={`${getImagesURL("original")}/${movie.backdrop_path}`}
-            alt=""
-            loading={"lazy"}
-            onLoad={() => {
-              console.log("Banner is fully loaded!")
-              setLoadingBackdropImage(false)
-            }}
-            style={{display: loadingBackdropImage ? "none" : "block"}}
+            alt={`${movie.title} banner`}
           />
         </div>
         <div className="movie-page__header__movie">
@@ -153,7 +147,7 @@ function MoviePage() {
           ) : recommendations.length > 0 ? (
             <ul className="movie-page__similar-movies__list">
               {recommendations.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} reset={{movie:setMovie, loading: setLoading,error: setError, backdrop: setLoadingBackdropImage}} />
+                <MediaCard mediaType={"movie"} key={movie.id} movie={movie} reset={{movie:setMovie, loading: setLoading,error: setError, backdrop: setLoadingBackdropImage}} />
               ))}
             </ul>
           ) : (

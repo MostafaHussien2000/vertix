@@ -5,6 +5,7 @@ import FeedPage from "./pages/FeedPage";
 import MoviePage from "./pages/MoviePage";
 import LandingPage from "./pages/LandingPage";
 import PrivateRoute from "./components/PrivateRoute";
+import SeriesPage from "./pages/SeriesPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             </PrivateRoute>
         }></Route>
         <Route path="/movie/:id" element={<MoviePage />}></Route>
+        <Route path="/tv/:seriesId" element={<SeriesPage />}></Route>
       </Routes>
     </div>
   );

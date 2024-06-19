@@ -17,7 +17,7 @@ import {
 import Loader from "../components/Loader";
 import { useAuth } from "../context/AuthContext";
 import {Link} from "react-router-dom";
-import MovieCard from "../components/MovieCard";
+import MediaCard from "../components/MediaCard";
 import {getListsItems} from "../api/fetchData";
 import ErrorMessage from "../components/ErrorMessage";
 import {FiSearch} from "react-icons/fi";
@@ -157,7 +157,7 @@ function FeedPage() {
                             8
                         )
                             .map((movie) => (
-                                <MovieCard key={movie.id} movie={movie}/>
+                                <MediaCard mediaType={currentFeed === 0 ? "movie" : "tv"} key={movie.id} movie={movie}/>
                             )) : <center>No Data.</center>
             }
           </ul>
@@ -230,7 +230,7 @@ function CarouselCard ({item, index}) {
         <div className="feed-page__main-content__featured__movie__content">
           <img
               className="feed-page__main-content__featured__movie__banner"
-              src={`${getImagesURL()}/${item.backdrop_path}`}
+              src={`${getImagesURL("original")}/${item.backdrop_path}`}
           />
           <div className="feed-page__main-content__featured__movie__info">
             <h3>{item.original_title || item.name}</h3>
