@@ -1,16 +1,20 @@
 // Colors
-$color-accent: #d8042a;
-$color-accent-hover: #bb0123;
-$color-primary-shade: #1a191e;
-$color-secondary-shade: #2f3034;
-$color-tertiary-shade: #626365;
-$color-light-white: rgb(255, 255, 255);
+$color-accent: #FCBE59;
+$color-accent-hover: #FFB43A;
+$color-primary-shade: #1A1A1A;
+$color-secondary-shade: #2B2B2B;
+$color-tertiary-shade: #515151;
+$color-light-white: #FFFFFF;
 $color-dark-black: #000000;
 $color-success: #19d862;
 $color-rate: #fd7a2e;
+$color-danger: #FC5959;
+$color-danger-hover: #FF3A3A;
 
-$color-skeleton-primary-shade: #131216;
-$color-skeleton-secondary-shade: #0e0d10;
+$color-skeleton-primary-shade: #161514;
+$color-skeleton-secondary-shade: #100F0E;
+
+$color-banner-shading-gradient: linear-gradient(180deg, rgba(26,26,26,1) 0%, rgba(0,0,0,0.22405458765537467) 60%, rgba(26,26,26,1) 100%);
 
 // Font Sizes
 $font-size-large: 40px;

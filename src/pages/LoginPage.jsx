@@ -17,7 +17,7 @@ function LoginPage() {
 
   const navigate = useNavigate()
   useEffect(() => {
-    if (currentUser) navigate("/feed")
+    if (currentUser) navigate("/app/feed")
   }, []);
 
   const handleLogin = async (e) => {

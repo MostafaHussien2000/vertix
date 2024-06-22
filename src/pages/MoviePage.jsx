@@ -8,9 +8,10 @@ import {
 import {TbArrowNarrowLeft, TbPlus, TbStarFilled} from "react-icons/tb";
 import { FaImdb } from "react-icons/fa";
 import { PiTimerBold } from "react-icons/pi";
-import Loader from "../components/Loader";
+import Loader from "../components/loaders/Loader";
 import {Link, useParams} from "react-router-dom";
 import MediaCard from "../components/MediaCard";
+import MediaPageSkeletonLoader from "../components/loaders/MediaPageSkeletonLoader";
 
 function MoviePage() {
   // Test Movie ID: 882059
@@ -54,14 +55,14 @@ function MoviePage() {
       });
   }, [movieId, loadingBackdropImage]);
 
-  if (loading && loadingBackdropImage) return <PageSkeleton />;
+  if (loading && loadingBackdropImage) return <MediaPageSkeletonLoader />;
 
   if (error) return <p>Something went wrong!</p>;
 
   return (
     <main className="movie-page">
       <header className="movie-page__header">
-        <Link to={"/feed"} className={"movie-page__header__go-back"}>
+        <Link to={"/app/feed/movies"} className={"movie-page__header__go-back"}>
           <div className={"movie-page__header__go-back__icon"}><TbArrowNarrowLeft /></div>
           <p className={"movie-page__header__go-back__text"}>Back to feed</p>
         </Link>
@@ -161,23 +162,3 @@ function MoviePage() {
 }
 
 export default MoviePage;
-
-function PageSkeleton() {
-  return (
-    <div className="movie-page__skeleton">
-      <div className="movie-page__skeleton__header">
-        <div className="movie-page__skeleton__header__banner"></div>
-        <div className="movie-page__skeleton__header__movie">
-          <div className="movie-page__skeleton__header__movie__poster"></div>
-          <div className="movie-page__skeleton__header__movie__info">
-            <div className="movie-page__skeleton__header__movie__info__title"></div>
-            <div className="movie-page__skeleton__header__movie__info__paragraph-line"></div>
-            <div className="movie-page__skeleton__header__movie__info__paragraph-line"></div>
-            <div className="movie-page__skeleton__header__movie__info__paragraph-line"></div>
-            <div className="movie-page__skeleton__header__movie__info__paragraph-line"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}

@@ -1,7 +1,68 @@
-.feed-page {
+.main-app-page {
   display: grid;
   grid-template-columns: 200px 1fr 350px;
   gap: 30px;
+
+  .feed {
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__navigation {
+      margin: 20px 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 20px;
+      a {
+        opacity: 0.5;
+        cursor: pointer;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 100%;
+          width: 50%;
+          height: 3px;
+          border-radius: 3px;
+          background: $color-accent;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.2s ease;
+        }
+        &.active {
+          opacity: 1;
+          &::before {
+            transform: scaleX(1);
+          }
+        }
+      }
+    }
+    &__search {
+      padding: 5px;
+      font-size: $font-size-mid;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.2s ease;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    &__category {
+      margin-top: 50px;
+      &__heading {
+        font-size: $font-size-mid;
+        font-weight: $font-weight-semibold;
+        margin-bottom: 15px;
+      }
+      &__items {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+    }
+  }
 
   &__main-content {
     padding: 30px 0;

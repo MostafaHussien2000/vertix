@@ -11,14 +11,14 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<LandingPage />}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/signup" element={<SignUpPage />}></Route>
-        <Route path="/feed" element={
+        <Route path={"/"} element={<LandingPage />}></Route>
+        <Route path={"/login"} element={<LoginPage />}></Route>
+        <Route path={"/signup"} element={<SignUpPage />}></Route>
+        <Route path={"/app/*"} element={
             <PrivateRoute>
                 <FeedPage />
             </PrivateRoute>
-        }></Route>
+        } />
         <Route path="/movie/:id" element={<MoviePage />}></Route>
         <Route path="/tv/:seriesId" element={<SeriesPage />}></Route>
       </Routes>

@@ -1,0 +1,122 @@
+.carousel {
+  width: 100%;
+  border-radius: 25px;
+  overflow: hidden;
+  &__slide {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: rgb(0, 0, 0);
+      background: linear-gradient(
+                      180deg,
+                      rgba(0, 0, 0, 0) 0%,
+                      $color-primary-shade 100%
+      );
+      top: 0px;
+      left: 0px;
+      z-index: 2;
+    }
+    &__info {
+      position: absolute;
+      z-index: 5;
+      bottom: 45px;
+      left: 20px;
+      h3 {
+        font-size: $font-size-mid;
+        font-weight: $font-weight-semibold;
+        margin-bottom: 15px;
+      }
+    }
+    &__actions {
+      display: flex;
+      gap: 10px;
+
+      > * {
+        height: 60px;
+        border-radius: 15px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &__details {
+        background-color: $color-accent;
+        color: $color-primary-shade;
+        font-weight: $font-weight-medium;
+        font-size: $font-size-regular;
+        padding: 0px 25px;
+        transition: background 0.2s ease;
+
+        &:hover {
+          background-color: $color-accent-hover;
+        }
+      }
+      &__list {
+        background-color: #ffffff28;
+        backdrop-filter: blur(4px);
+        width: 60px;
+        font-size: $font-size-mid;
+        font-weight: $font-weight-semibold;
+      }
+    }
+  }
+}
+.slick-slider {
+  width: unset;
+  cursor: grab;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .slick-list {
+    width: unset;
+  }
+  .slick-track {
+    //width: unset !important;
+  }
+  .slick-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 8px;
+    border-radius: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+
+
+    li {
+      all: unset;
+      display: block;
+      width: 10px;
+      height: 10px;
+      background-color: $color-light-white;
+      opacity: 0.5;
+      border-radius: 20px;
+      transition: width 0.2s ease;
+      cursor: pointer;
+
+      &.slick-active {
+        opacity: 1;
+        width: 25px;
+        cursor: auto;
+      }
+
+      button {
+        content: "";
+        width: 100%;
+        height: 100%;
+        &::before {display: none}
+      }
+    }
+  }
+}

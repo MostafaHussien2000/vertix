@@ -1,4 +1,4 @@
-.series-page{
+.series-page {
   &__container {
     width: 85%;
     margin: auto;
@@ -15,14 +15,7 @@
       top: 0;
       left: 0;
       display: block;
-      background: rgba(26, 25, 30, 1);
-      background: linear-gradient(
-                      -180deg,
-                      rgba(26, 25, 30, 0.7058473047422094) 0%,
-                      rgba(0, 0, 0, 0.28405458765537467) 60%,
-                      rgba(26, 25, 30, 1) 90%,
-                      rgba(26, 25, 30, 1) 100%
-      );
+      background: $color-banner-shading-gradient;
       z-index: 4;
       backdrop-filter: blur(2px);
     }
@@ -57,23 +50,32 @@
     &__banner {
       user-select: none;
       min-height: 80svh;
-      max-height: 100svh;
+      max-height: 80svh;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20svh;
 
       img {
         display: block;
         width: 100%;
         height: 90svh;
         object-fit: cover;
+        filter: saturate(0.5);
       }
     }
 
     &__content {
       position: absolute;
       width: 85%;
-      bottom: 25%;
+      bottom: 0;
       left: calc(15% / 2);
       z-index: 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
       h1 {
         font-size: $font-size-large;
@@ -85,7 +87,7 @@
         gap: 5px;
         font-size: $font-size-regular;
         font-weight: $font-weight-medium;
-        margin: 15px;
+        margin: 10px;
       }
       &__stats {
         display: flex;
@@ -118,6 +120,7 @@
       button {
         background: $color-accent;
         font-size: $font-size-regular;
+        color: $color-primary-shade;
         padding: 0 25px;
         transition: background 0.2s ease;
         height: 55px;
@@ -132,11 +135,82 @@
         &:hover {
           background-color: $color-accent-hover;
         }
+        svg {
+          stroke: $color-primary-shade;
+        }
       }
     }
   }
-
+  &__genres {
+    margin: 50px 0;
+    &__heading {
+      font-size: $font-size-mid;
+      font-weight: $font-weight-semibold;
+      color: $color-light-white;
+    }
+    &__items {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      padding: 20px;
+      &__item {
+        position: relative;
+        padding: 15px 20px;
+        background: $color-skeleton-primary-shade;
+        overflow: hidden;
+        border-radius: 15px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: border-color 0.2s ease;
+        &:hover {
+          border-color: $color-accent;
+          h4 {
+            color: $color-accent;
+          }
+          svg {
+            fill: $color-accent
+          }
+        }
+        h4 {
+          font-size: $font-size-regular;
+          font-weight: $font-weight-medium;
+          transition: color 0.2s ease;
+        }
+        svg {
+          position: absolute;
+          pointer-events: none;
+          user-select: none;
+          font-size: $font-size-large;
+          transform: scale(1.8) translateX(-10%) translateY(50%);
+          left: 0;
+          bottom: 80%;
+          opacity: 0.09;
+          transition: fill 0.2s ease;
+        }
+      }
+    }
+  }
+  &__overview {
+    margin-top: 50px;
+    &__heading {
+      font-size: $font-size-mid;
+      font-weight: $font-weight-semibold;
+      color: $color-light-white;
+    }
+    &__paragraph {
+      font-size: $font-size-regular;
+      font-weight: $font-weight-regular;
+      color: $color-light-white;
+      opacity: 0.6;
+      padding: 20px;
+      border-radius: 20px;
+      margin: 10px 0;
+    }
+  }
   &__seasons {
+    margin-top: 50px;
     &__heading {
       font-size: $font-size-mid;
       font-weight: $font-weight-semibold;
@@ -253,6 +327,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
 
             img {
               width: 100%;
@@ -274,10 +349,13 @@
             font-size: $font-size-regular;
             font-weight: $font-weight-semibold;
             margin: 5px 0 2px 0;
+            display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1; /* Number of lines to show */
+            width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
+            cursor: pointer;
           }
           &__rate {
             display: flex;
@@ -307,7 +385,6 @@
       }
     }
   }
-
   &__brought-by {
     margin: 50px 0;
 
@@ -318,15 +395,12 @@
       place-items: center;
       margin-top: 20px;
 
-      &__company {
-        align-self: center;
 
-        img {
-          max-width: 100px;
-          max-height: 100px;
-          object-fit: contain;
-          user-select: none;
-        }
+      img {
+        max-width: 100px;
+        max-height: 100px;
+        object-fit: cover;
+        user-select: none;
       }
     }
   }

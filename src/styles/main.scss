@@ -7,7 +7,7 @@
 ======== */
 @import "./pages/login";
 @import "./pages/sign-up";
-@import "./pages/feeds";
+@import "pages/feed";
 @import "./pages/movie";
 @import "./pages/series";
 @import "./pages/landing";
@@ -20,3 +20,6 @@
 @import "./components/movie-card";
 @import "./components/modal";
 @import "./components/search";
+@import "./components/side-nav";
+@import "./components/carousel";
+@import "./components/skeleton";

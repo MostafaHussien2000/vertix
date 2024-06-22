@@ -14,17 +14,34 @@ import {
   TbStarFilled,
   TbVideo,
 } from "react-icons/tb";
-import Loader from "../components/Loader";
+import Loader from "../components/loaders/Loader";
 import { useAuth } from "../context/AuthContext";
-import {Link} from "react-router-dom";
+import {Link, Navigate, Route, Routes} from "react-router-dom";
 import MediaCard from "../components/MediaCard";
 import {getListsItems} from "../api/fetchData";
 import ErrorMessage from "../components/ErrorMessage";
 import {FiSearch} from "react-icons/fi";
 import Modal from "../components/Modal";
 import Search from "../components/Search";
+import Feed from "./sub-pages/Feed";
+import SideNav from "../components/SideNav";
 
 function FeedPage() {
+
+
+
+  return (
+      <div className={"main-app-page"}>
+        <SideNav />
+        <Routes>
+          <Route path={"feed/*"} element={<Feed />} />
+          <Route path={"watchlist"} element={<h1>Watchlist</h1>} />
+          <Route path={""} element={<Navigate to={"feed"} replace/>} />
+        </Routes>
+        <div><h1>Side Bar</h1></div>
+
+      </div>
+  );
 
   // Constants
   const NUMBER_OF_CAROUSEL_SLIDES = 4;
@@ -56,6 +73,7 @@ function FeedPage() {
       nowPlaying: currentFeed === 0 ? nowPlayingMoviesURL() : onTheAirSeriesURL(),
       topRated: currentFeed === 0 ? topRatedMoviesURL() : topRatedSeriesURL(),
     }
+
 
     // Fetching Popular Items
     fetchData(DATA_URLs.popular, setLoadingPopular, setErrorPopular, setPopular)
