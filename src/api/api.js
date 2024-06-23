@@ -21,7 +21,7 @@ export const getImagesURL = (size = "w500") =>
 
 /* Movies Related URLs
 ====================== */
-export const popularMoviesURL = (adult = false, video = false, page = 2) =>
+export const popularMoviesURL = (adult = false, video = false, page = 1) =>
   `${API_URL}/3/discover/movie?include_adult=${adult}&include_video=${video}&language=en-US&page=${page}&sort_by=popularity.desc&api_key=${API_KEY}`;
 export const nowPlayingMoviesURL = (adult = false, video = false, page = 1) =>
   `${API_URL}/3/movie/now_playing?language=en-US&page=${page}&api_key=${API_KEY}`;
