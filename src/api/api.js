@@ -2,6 +2,10 @@ const API_URL = process.env.REACT_APP_TMDB_API_URL;
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 const ACCESS_TOKEN = process.env.REACT_APP_TMDB_ACCESS_TOKEN;
 
+const NEWS_URL = process.env.REACT_APP_NEWS_URL;
+const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY
+
+
 
 /* Request Options
 ================== */
@@ -45,3 +49,8 @@ export const getSeasonDataURL = (seriesId, seasonNumber) => `${API_URL}/3/tv/${s
 /* Search URLs
 ============== */
 export const multiSearch = (category="multi", query="", page = 1) => `${API_URL}/3/search/${category}?query=${query}&include_adult=false&language=en-US&page=${page}`
+
+
+/* News API
+=========== */
+export const getNewsURL = () => `${NEWS_URL}?q=box%20office&apiKey=${NEWS_API_KEY}&sortBy=relevency`

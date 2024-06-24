@@ -22,7 +22,7 @@ function Feed () {
     const [modal, viewModal] = useState(false);
 
     return (
-        <main style={{width: `${feedWidth(635)}px`}} className={"feed"}>
+        <main style={{width: `${feedWidth(610)}px`}} className={"feed"}>
             {
                 modal ? <Modal view={viewModal}><Search /></Modal> : <></>
             }

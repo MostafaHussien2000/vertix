@@ -1,14 +1,15 @@
 .side-nav {
   display: grid;
-  grid-template-rows: 80px 150px 1fr 200px;
+  grid-template-rows: 80px 1fr 200px;
   gap: 10px;
   height: 100svh;
   position: sticky;
   top: 0;
   max-width: 200px;
   padding: 5px;
+  overflow: hidden;
   > * {
-    max-width: 100%;
+    max-width: 200px;
   }
   &__app-logo {
     display: flex;
@@ -21,15 +22,65 @@
       margin: 0;
     }
   }
-  &__menu {}
-  h3 {
-    margin: 10px 0 20px 30px;
-    font-size: $font-size-regular;
-    font-weight: $font-weight-regular;
-    color: $color-tertiary-shade;
+  &__menu {
+    h3 {
+      margin: 10px 0 20px 30px;
+      font-size: $font-size-regular;
+      font-weight: $font-weight-regular;
+      color: $color-tertiary-shade;
+    }
+    ul {
+      li:not(:has(> a)), li > a {}
+    }
+  }
+  &__options {
+
   }
 
-  ul{
+  ul {
+    padding-left: 30px;
+    li:not(:has(> a)), li > a {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+      font-size: $font-size-regular;
+      cursor: pointer;
+      margin-top: 5px;
+      border-radius: 8px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+      &:hover {
+        background: $color-skeleton-secondary-shade;
+      }
+      &.active {
+        color: $color-light-white;
+        background: $color-skeleton-secondary-shade;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 3px;
+          border-radius: 5px;
+          background: $color-accent;
+        }
+        svg {
+          stroke: $color-light-white;
+        }
+        span {
+          color: $color-light-white;
+        }
+      }
+    }
+  }
+  /*
+  ul {
     li, a {
       display: flex;
       justify-content: flex-start;
@@ -37,11 +88,12 @@
       gap: 15px;
       position: relative;
     }
-    li{
+    li {
       font-size: $font-size-regular;
       cursor: pointer;
       margin-top: 5px;
       margin-left: 30px;
+      border-radius: 8px;
       a {
         width: 100%;
         padding: 10px;
@@ -81,4 +133,5 @@
       }
     }
   }
+  */
 }

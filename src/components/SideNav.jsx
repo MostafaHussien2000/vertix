@@ -11,6 +11,7 @@ import {Link, NavLink} from "react-router-dom";
 ============== */
 import {TbLogout, TbSettings2, TbVideo} from "react-icons/tb";
 import {HiOutlineViewGridAdd} from "react-icons/hi";
+import {LuNewspaper} from "react-icons/lu";
 /* Static Images
 ================ */
 import logo from "../static/logo.png";
@@ -50,10 +51,10 @@ function SideNav () {
                     <li>
                         <NavLink
                             className={({ isActive }) => (isActive ? 'active' : '')}
-                            to={"/app/watchlist"}
+                            to={"/app/news"}
                         >
-                            <TbVideo />
-                            <span>WatchList</span>
+                            <LuNewspaper />
+                            <span>News</span>
                         </NavLink>
                     </li>
                 </ul>

@@ -9,15 +9,17 @@ import {getImagesURL, getSeasonDataURL, getSeriesDataURL, options} from "../api/
 import {BiSolidQuoteLeft, BiSolidQuoteRight} from "react-icons/bi";
 import {FaImdb} from "react-icons/fa";
 import {TbArrowNarrowLeft, TbPlus, TbStarFilled} from "react-icons/tb";
+import {FaHashtag} from "react-icons/fa6";
 /* React Router DOM
 =================== */
 import {Link, useParams} from "react-router-dom";
 /* Images
 ========= */
 import imagePlaceholder from "../static/placeholder-image.webp"
+/* React Components
+=================== */
 import MediaPageSkeletonLoader from "../components/loaders/MediaPageSkeletonLoader";
 import ErrorMessage from "../components/ErrorMessage";
-import {FaHashtag} from "react-icons/fa6";
 
 function SeriesPage () {
     const [series, setSeries] = useState({});
