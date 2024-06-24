@@ -9,15 +9,14 @@ import {useEffect, useState} from "react";
 import RequestLoader from "../components/RequestLoader";
 
 function LoginPage() {
-  const {login, currentUser} = useAuth()
+  const {login, currentUser} = useAuth();
 
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
-    if (currentUser) navigate("/app/feed")
+    if (currentUser) navigate("/app/feed");
   }, []);
 
   const handleLogin = async (e) => {
@@ -31,14 +30,14 @@ function LoginPage() {
     }
 
     try {
-      await login(logData.email, logData.password)
-      setLoading()
-      setError("")
-      navigate("/feed")
+      await login(logData.email, logData.password);
+      setError("");
+      navigate("/app/feed");
     } catch(err) {
       console.error(err)
-      setError("Something went wrong.")
-      setLoading(false)
+      setError("Something went wrong.");
+    } finally {
+      setLoading(false);
     }
   }
   return (

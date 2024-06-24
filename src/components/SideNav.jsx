@@ -19,8 +19,9 @@ import logo from "../static/logo.png";
 
 function SideNav () {
     // Auth
-    const [logoutError, setLogoutError] = useState("")
-    const {logout} = useAuth()
+    const [logoutError, setLogoutError] = useState("");
+    const {currentUser} = useAuth();
+    const {logout} = useAuth();
     const handleLogout = async () => {
         setLogoutError("")
         try {
@@ -31,7 +32,9 @@ function SideNav () {
     }
     return (
         <aside className="side-nav">
-            <img src={logo} alt="vertix logo" />
+            <div className="side-nav__app-logo">
+                <img src={logo} alt="vertix logo" />
+            </div>
             <div className="side-nav__menu">
                 <h3>Menu</h3>
                 <ul>

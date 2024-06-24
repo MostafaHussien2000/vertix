@@ -6,6 +6,7 @@ import MoviePage from "./pages/MoviePage";
 import LandingPage from "./pages/LandingPage";
 import PrivateRoute from "./components/PrivateRoute";
 import SeriesPage from "./pages/SeriesPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -21,6 +22,11 @@ function App() {
         } />
         <Route path="/movie/:id" element={<MoviePage />}></Route>
         <Route path="/tv/:seriesId" element={<SeriesPage />}></Route>
+          <Route path={"/me"} element={
+              <PrivateRoute>
+                  <ProfilePage />
+              </PrivateRoute>
+          } />
       </Routes>
     </div>
   );

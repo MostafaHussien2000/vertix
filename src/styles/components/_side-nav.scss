@@ -1,17 +1,29 @@
 .side-nav {
   display: grid;
-  grid-template-rows: 150px 1fr 200px;
+  grid-template-rows: 80px 150px 1fr 200px;
+  gap: 10px;
   height: 100svh;
   position: sticky;
   top: 0;
-
-  img {
-    width: 40px;
-    margin: 30px 0 0 30px;
+  max-width: 200px;
+  padding: 5px;
+  > * {
+    max-width: 100%;
   }
-
+  &__app-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      max-width: 40px;
+      max-height: 100%;
+      object-fit: cover;
+      margin: 0;
+    }
+  }
+  &__menu {}
   h3 {
-    margin: 40px 0 20px 30px;
+    margin: 10px 0 20px 30px;
     font-size: $font-size-regular;
     font-weight: $font-weight-regular;
     color: $color-tertiary-shade;

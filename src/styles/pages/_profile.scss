@@ -1,0 +1,118 @@
+.profile-page {
+  &__container {
+    width: 65%;
+    max-width: 2000px;
+    min-width: 320px;
+    margin: auto;
+  }
+  &__go-back {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+
+    &__icon {
+      font-size: $font-size-mid;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(2px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &__text {
+      font-size: $font-size-regular;
+    }
+  }
+  &__header {
+    &__cover {
+      width: 100%;
+      height: 200px;
+      background: $color-skeleton-secondary-shade;
+      border-radius: 50px;
+    }
+    &__info {
+      width: 80%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      transform: translateY(-50px);
+      &__data {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        img {
+          box-sizing: content-box;
+          width: 100px;
+          border-radius: 50px;
+          border: 3px solid $color-primary-shade;
+        }
+        h1 {
+          font-size: $font-size-mid;
+          font-weight: $font-weight-semibold;
+        }
+        p {
+          font-size: $font-size-regular;
+          color: $color-tertiary-shade;
+        }
+      }
+      &__action {
+        position: relative;
+        button {
+          background: transparent;
+          border: none;
+          font-size: $font-size-mid;
+          cursor: pointer;
+        }
+        &__menu {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          width: 180px;
+          background: $color-skeleton-primary-shade;
+          padding: 15px;
+          border-radius: 20px;
+          transition: transform 0.2s ease,
+                      opacity 0.2s ease;
+          &.hidden {
+            transform: translateY(-20px);
+            opacity: 0;
+            pointer-events: none;
+          }
+          hr {
+            opacity: 0.2;
+            width: 90%;
+            margin: 5px auto;
+          }
+          li {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 10px 8px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+            &:hover {
+              background: $color-secondary-shade;
+            }
+            span {
+              font-size: $font-size-regular;
+            }
+            &.danger {
+              > * {
+                color: $color-danger;
+                stroke: $color-danger;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -16,13 +16,13 @@ import React, {useEffect, useState} from "react";
 
 
 function Feed () {
-    const pageWidth = window.innerWidth;
+    const feedWidth = (exclude) => window.innerWidth - exclude;
 
     // Search Modal
     const [modal, viewModal] = useState(false);
 
     return (
-        <main style={{width: `${pageWidth - 550}px`}} className={"feed"}>
+        <main style={{width: `${feedWidth(635)}px`}} className={"feed"}>
             {
                 modal ? <Modal view={viewModal}><Search /></Modal> : <></>
             }
