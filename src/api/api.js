@@ -36,6 +36,7 @@ export const movieRecommendationsURL = (movieId) =>
   `${API_URL}/3/movie/${movieId}/recommendations?language=en-US&page=1`;
 export const getMovieDataURL = (movieId) =>
     `${API_URL}/3/movie/${movieId}?language=en-US`;
+export const getMovieReviewURL = (movieId) => `${API_URL}/3/movie/${movieId}/reviews`
 
 /* Series Relate URLs
 ===================== */

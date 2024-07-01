@@ -1,51 +1,137 @@
-.skeleton {
-  * {
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-name: shimmer;
-    animation-timing-function: linear;
-    background-color:  $color-skeleton-secondary-shade;
-    background-image: linear-gradient(to right,  $color-skeleton-secondary-shade 8%,  $color-skeleton-primary-shade 18%, $color-skeleton-secondary-shade 33%);
-    background-size: 900px 104px;
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
   }
-  &.media-card {
+  100% {
+    background-position: 350px 0;
+  }
+}
+
+
+@mixin skeletonAnimation($mainColor, $secondaryColor) {
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: shimmer;
+  animation-timing-function: linear;
+  background-color:  $secondaryColor;
+  background-image: linear-gradient(to right,  $mainColor 8%,  $secondaryColor 18%, $mainColor 45%);
+  background-size: 900px 104px;
+}
+
+.skeleton {
+  .media-card-placeholder {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    > .media-card__poster{
-        display: block;
-        width: 100%;
-        aspect-ratio: 3 / 4;
-        border-radius: 25px;
+    &__poster {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 25px;
+      @include skeletonAnimation($color-skeleton-secondary-shade, $color-skeleton-primary-shade);
     }
-    > .media-card__title{
+    &__title {
       width: 70%;
       height: 20px;
       border-radius: 6px;
+      @include skeletonAnimation($color-skeleton-secondary-shade, $color-skeleton-primary-shade);
     }
   }
-  &.featured-media {
-    > .featured-media__banner {
+  .featured-media {
+    &__banner {
       width: 100%;
       aspect-ratio: 15 / 8;
       border-radius: 25px;
+      @include skeletonAnimation($color-skeleton-secondary-shade, $color-skeleton-primary-shade);
     }
   }
-  &.episode-card {
-    &__banner{}
-    &__title{}
-  }
-  &.movies-details {
-    &__header {
+  .movie-details {}
+  .episode-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &__banner {
+      display: block;
       width: 100%;
-      height: 100%;
-      background-color: $color-skeleton-primary-shade;
+      aspect-ratio: 3 / 4;
+      border-radius: 25px;
+      @include skeletonAnimation($color-skeleton-secondary-shade, $color-skeleton-primary-shade);
+    }
+    &__title {
+      width: 70%;
+      height: 20px;
+      border-radius: 6px;
+      @include skeletonAnimation($color-skeleton-secondary-shade, $color-skeleton-primary-shade);
+    }
+  }
+  .article-placeholder {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &__banner{
+      display: block;
+      width: 100%;
+      aspect-ratio: 15 / 9;
+      border: 15px;
+      border-radius: 15px;
+      @include skeletonAnimation($color-skeleton-secondary-shade, $color-skeleton-primary-shade);
+    }
+    &__line {
+      width: 70%;
+      height: 20px;
+      border-radius: 6px;
+      @include skeletonAnimation($color-skeleton-secondary-shade, $color-skeleton-primary-shade);
+    }
+  }
+  .featured-article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    &__banner {
+      width: 100%;
+      aspect-ratio: 15 / 9;
+      border-radius: 20px;
+      @include skeletonAnimation($color-skeleton-secondary-shade, $color-skeleton-primary-shade);
+    }
+    &__text {
+      background: unset;
+      animation: unset;
+      &__heading {
+        width: 100%;
+        height: 30px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        @include skeletonAnimation($color-skeleton-secondary-shade, $color-skeleton-primary-shade);
+      }
+      &__p {
+        width: 100%;
+        height: 15px;
+        border-radius: 3px;
+        opacity: 0.6;
+        margin-bottom: 6px;
+        @include skeletonAnimation($color-skeleton-secondary-shade, $color-skeleton-primary-shade);
+        &:last-of-type {
+          width: 60%;
+        }
+      }
+    }
+  }
+}
+/*
+.skeleton {
+  &.movie-details {
+    animation: none !important;
+    .movie-details__header {
+      width: 100%;
+      height: 100vh;
       border-radius: 20px;
       position: relative;
+      @include skeletonAnimation($color-skeleton-primary-shade);
       &__movie {
         position: absolute;
-        bottom: -50px;
+        bottom: 20px;
         z-index: 4;
         width: 60%;
         max-width: 1000px;
@@ -58,7 +144,8 @@
         &__poster {
           width: 100%;
           aspect-ratio: 1 / 1.5;
-          background-color: $color-skeleton-secondary-shade;
+          //background-color: $color-skeleton-secondary-shade;
+          @include skeletonAnimation($color-skeleton-secondary-shade);
           border-radius: 20px;
         }
         &__info {
@@ -133,12 +220,4 @@
     }
   }
 }
-
-@keyframes shimmer {
-  0% {
-    background-position: -468px 0;
-  }
-  100% {
-    background-position: 350px 0;
-  }
-}
+*/

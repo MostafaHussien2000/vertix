@@ -5,21 +5,21 @@ import Loader from "./Loader";
 function Skeleton({type}) {
     switch (type) {
         case "mediaCard":
-            return <MediaCard />;
+            return <div className={"skeleton"}><MediaCard /></div>;
         case "featuredMedia":
-            return <FeaturedMedia />;
+            return <div className={"skeleton"}><FeaturedMedia/></div>;
         case "episodeCard":
-            return <EpisodeCard />;
+            return <div className={"skeleton"}><EpisodeCard/></div>;
         case "moviePage":
-            return <MovieDetailsPage />;
+            return <div className={"skeleton"}><MovieDetailsPage/></div>;
         case "seriesPage":
-            return;
-        case "newsCard":
-            return <ArticlePlaceholder />;
+            return <div className={"skeleton"}><SeriesDetailsPage/></div>;
+        case "articleCard":
+            return <div className={"skeleton"}><ArticlePlaceholder/></div>;
         case "featuredArticle":
-            return <FeaturedArticle />;
+            return <div className={"skeleton"}><FeaturedArticle/></div>;
         default:
-            return <Loader />;
+            return <Loader/>;
     }
 }
 
@@ -27,9 +27,9 @@ export default Skeleton;
 
 function MediaCard () {
     return (
-        <div className="skeleton media-card">
-            <div className="media-card__poster"></div>
-            <div className="media-card__title"></div>
+        <div className="media-card-placeholder">
+            <div className="media-card-placeholder__poster"></div>
+            <div className="media-card-placeholder__title"></div>
         </div>
     );
 }
@@ -48,7 +48,6 @@ function MovieDetailsPage () {
     return (
         <div className="skeleton movie-details">
             <div className="movie-details__header">
-                <div className="movie-details__header__banner"></div>
                 <div className="movie-details__header__movie">
                     <div className="movie-details__header__movie__poster"></div>
                     <div className="movie-details__header__movie__info">
@@ -62,6 +61,9 @@ function MovieDetailsPage () {
             </div>
         </div>
     )
+}
+function SeriesDetailsPage () {
+    return <></>
 }
 function ArticlePlaceholder () {
     return (

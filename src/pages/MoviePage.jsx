@@ -1,20 +1,36 @@
-import React, { useEffect, useState } from "react";
+/* React Hooks
+============== */
+import { useEffect, useState } from "react";
+/* React Icons
+============== */
+import {TbArrowNarrowLeft, TbPlus} from "react-icons/tb";
+import { FaImdb } from "react-icons/fa";
+import { PiTimerBold } from "react-icons/pi";
+/* API URLs
+=========== */
 import {
   getMovieDataURL,
   getImagesURL,
   movieRecommendationsURL,
-  options,
+  options, getMovieReviewURL,
 } from "../api/api";
-import {TbArrowNarrowLeft, TbPlus, TbStarFilled} from "react-icons/tb";
-import { FaImdb } from "react-icons/fa";
-import { PiTimerBold } from "react-icons/pi";
+/* React Components
+=================== */
 import Loader from "../components/loaders/Loader";
-import {Link, useParams} from "react-router-dom";
 import MediaCard from "../components/MediaCard";
-import MediaPageSkeletonLoader from "../components/loaders/MediaPageSkeletonLoader";
+import ReviewCard from "../components/ReviewCard";
 import Skeleton from "../components/loaders/Skeleton";
+/* SLick Slider
+=============== */
+import Slider from "react-slick";
+/* React Router DOM
+=================== */
+import {Link, useParams} from "react-router-dom";
 
 function MoviePage() {
+
+  return <Skeleton type={"moviePage"} />
+
   // Test Movie ID: 882059
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
@@ -23,6 +39,12 @@ function MoviePage() {
   const [recommendations, setRecommendations] = useState([]);
   const [loadRecom, setLoadRecom] = useState(true);
   const [errorRecom, setErrorRecom] = useState(false);
+
+  const [reviews, setReviews] = useState({
+    data: [],
+    loading: true,
+    error: ""
+  })
 
   const [loadingBackdropImage, setLoadingBackdropImage] = useState(true)
 
@@ -41,6 +63,13 @@ function MoviePage() {
           .then((data) => {
             setRecommendations(data.results.slice(0, 8));
           })
+            .then(() => {
+              fetch(getMovieReviewURL(movieId), options())
+                  .then((response) => response.json())
+                  .then(data => setReviews(old => ({...old, data: data.results})))
+                  .catch(err => setReviews(old => ({...old, error: "Something went wrong."})))
+                  .finally(() => setReviews(old => ({...old, loading: false})))
+            })
           .catch((err) => {
             setErrorRecom(true);
           })
@@ -63,6 +92,44 @@ function MoviePage() {
       </>
   );
 
+  // Carousel Settings
+  const settings = {
+    dots: false,
+    arrows: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2, // Show 5 slides at a time
+    slidesToScroll: 1, // Scroll one slide at a time
+    centerMode: false, // Centers the active slide
+    centerPadding: '0', // No padding around the centered slide
+    focusOnSelect: false, // Focus on the selected slide
+    gap: 20,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
+
   if (error) return <p>Something went wrong!</p>;
 
   return (
@@ -83,7 +150,7 @@ function MoviePage() {
             <img
               loading="lazy"
               src={`${getImagesURL()}/${movie.poster_path}`}
-              alt=""
+              alt={`${movie.title} poster.`}
             />
           </div>
           <div className="movie-page__header__movie__info">
@@ -141,6 +208,18 @@ function MoviePage() {
                 )}
               </div>
             ))}
+          </div>
+        </section>
+        <section className="movie-page__reviews">
+          <h1>Reviews</h1>
+          <div className="movie-page__reviews__items">
+            <Slider {...settings}>
+              {
+                reviews?.loading ?
+                    <Loader />
+                    : reviews?.data?.map(item => <ReviewCard review={item} key={item.author_details.username}/>)
+              }
+            </Slider>
           </div>
         </section>
         <section className="movie-page__similar-movies">

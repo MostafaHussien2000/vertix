@@ -59,11 +59,11 @@ function News ({setSelectedArticle}) {
             const interval = Math.floor(diffInSeconds / unit.seconds);
             if (interval >= 1) {
                 return interval === 1
-                    ? `1 ${unit.name} ago`
-                    : `${interval} ${unit.name}s ago`;
+                    ? `1 ${unit.name} ago.`
+                    : `${interval} ${unit.name}s ago.`;
             }
         }
-        return "just now";
+        return "just now.";
     }
 
     return (
@@ -129,9 +129,9 @@ function NewsFeed ({news, loading, hasMore, setPage, setSelectedArticle}) {
                 {
                     hasMore ? (
                         <>
-                            <Skeleton type={"newsCard"}/>
-                            <Skeleton type={"newsCard"}/>
-                            <Skeleton type={"newsCard"}/>
+                            <Skeleton type={"articleCard"}/>
+                            <Skeleton type={"articleCard"}/>
+                            <Skeleton type={"articleCard"}/>
                         </>
                     ) : (
                         <></>

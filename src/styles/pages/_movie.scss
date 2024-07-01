@@ -96,6 +96,7 @@
     }
 
     &__go-back {
+      margin-left: 7.5%;
       position: absolute;
       z-index: 4;
       display: flex;
@@ -252,6 +253,19 @@
           user-select: none;
         }
       }
+    }
+  }
+
+  &__reviews {
+    margin-top: 50px;
+    .slick-slider {
+      .slick-track {
+        display: flex;
+        gap: 15px;
+      }
+    }
+    h1 {
+      margin-bottom: 25px;
     }
   }
 
