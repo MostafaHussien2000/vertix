@@ -31,3 +31,39 @@ img {
   display: block;
   width: 100%;
 }
+
+.end-of-items {
+  margin: 50px 0;
+  color: $color-tertiary-shade;
+  text-align: center;
+  font-size: $font-size-regular;
+  span {
+    position: relative;
+    color: $color-light-white;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    &::before {
+      position: absolute;
+      content: "";
+      width: 100%;
+      top: 100%;
+      height: 3px;
+      border-radius: 3px;
+      background: $color-accent;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
+    &:hover {
+      color: $color-accent;
+      svg {
+        stroke: $color-accent;
+      }
+      &::before {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

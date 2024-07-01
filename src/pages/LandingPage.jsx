@@ -95,7 +95,7 @@ function LandingPage() {
                     <img src={logo} alt={"Vertix logo"} />
                 </div>
                 <div className="landing-page__nav__actions">
-                    <Link onClick={() => console.log("link clicked")} to={"/login"} className="landing-page__nav__actions__login">Login</Link>
+                    <Link to={"/login"} className="landing-page__nav__actions__login">Login</Link>
                 </div>
             </nav>
             <header className="landing-page__header">
@@ -109,7 +109,6 @@ function LandingPage() {
                     </button>
                 </div>
                 <p className={"landing-page__header__learn-more"} onClick={() => {
-                    console.log("clicked")
                     const scrollY = window.innerHeight
                     window.scroll({
                         top: window.innerHeight + 10,

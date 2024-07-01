@@ -26,7 +26,7 @@ function SignUpPage() {
   const {signup, currentUser, setCurrentUser} = useAuth()
 
   useEffect(() => {
-    if (currentUser) navigate("/feed")
+    if (currentUser) navigate("/app/feed")
   }, [currentUser])
 
 
@@ -44,7 +44,7 @@ function SignUpPage() {
       setLoading(true)
       setLogError("")
       await signup(userData.fullName, userData.email, userData.password, "")
-      navigate("/feed");
+      navigate("/app/feed");
     } catch(err) {
       setLoading(false)
       console.error(err)

@@ -12,6 +12,7 @@ import Loader from "../components/loaders/Loader";
 import {Link, useParams} from "react-router-dom";
 import MediaCard from "../components/MediaCard";
 import MediaPageSkeletonLoader from "../components/loaders/MediaPageSkeletonLoader";
+import Skeleton from "../components/loaders/Skeleton";
 
 function MoviePage() {
   // Test Movie ID: 882059
@@ -55,7 +56,12 @@ function MoviePage() {
       });
   }, [movieId, loadingBackdropImage]);
 
-  if (loading && loadingBackdropImage) return <MediaPageSkeletonLoader />;
+  if (loading && loadingBackdropImage) return (
+      <>
+        <center>loading ...</center>
+        <Skeleton type={"moviePage"} />
+      </>
+  );
 
   if (error) return <p>Something went wrong!</p>;
 

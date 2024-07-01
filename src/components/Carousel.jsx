@@ -15,6 +15,7 @@ import {TbPlus} from "react-icons/tb";
 /* React Router DOM
 =================== */
 import {Link} from "react-router-dom";
+import {useEffect} from "react";
 
 function Carousel ({items = [], mediaType}) {
     let settings = {
@@ -26,6 +27,8 @@ function Carousel ({items = [], mediaType}) {
         arrows: false,
         appendDots: dots => <ul>{dots}</ul>
     };
+    useEffect(() => {
+    }, [items]);
     return (
         <div className={"carousel"}>
             <Slider {...settings}>

@@ -55,7 +55,6 @@ function SeriesPage () {
             .then(response => response.json())
             .then(d => {
                 setSelectedSeason(d);
-               // console.log(d)
             }).catch(err => {
                 setErrorSeason("Something went wrong");
                 console.log(err);

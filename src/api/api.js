@@ -53,4 +53,4 @@ export const multiSearch = (category="multi", query="", page = 1) => `${API_URL}
 
 /* News API
 =========== */
-export const getNewsURL = () => `${NEWS_URL}?q=box%20office&apiKey=${NEWS_API_KEY}&sortBy=relevency`
+export const getNewsURL = (page = 1) => `${NEWS_URL}?q=box%20office&apiKey=${NEWS_API_KEY}&sortBy=relevency&language=en&pageSize=8&page=${page}`

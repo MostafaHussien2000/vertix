@@ -1,67 +1,144 @@
 .skeleton {
-  width: 100vw;
-  height: 100svh;
-  padding: 50px;
-  margin-bottom: 50px;
-
-  // animation: loading 2s ease-in-out 0s infinite alternate both running;
-
-  animation-name: loading;
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
-  animation-direction: alternate;
-  animation-fill-mode: both;
-  animation-iteration-count: infinite;
-
-  &__header {
-    width: 100%;
-    height: 100%;
-    background-color: $color-skeleton-primary-shade;
-    border-radius: 20px;
-    position: relative;
-
-    &__movie {
-      position: absolute;
-      bottom: -50px;
-      z-index: 4;
-      width: 60%;
-      max-width: 1000px;
-      min-width: 350px;
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-
-      &__poster {
+  * {
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: shimmer;
+    animation-timing-function: linear;
+    background-color:  $color-skeleton-secondary-shade;
+    background-image: linear-gradient(to right,  $color-skeleton-secondary-shade 8%,  $color-skeleton-primary-shade 18%, $color-skeleton-secondary-shade 33%);
+    background-size: 900px 104px;
+  }
+  &.media-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    > .media-card__poster{
+        display: block;
         width: 100%;
-        aspect-ratio: 1 / 1.5;
-        background-color: $color-skeleton-secondary-shade;
-        border-radius: 20px;
-      }
-
-      &__info {
-        width: 100%;
-
-        &__title {
-          height: 40px;
-          width: 80%;
-          border-radius: 10px;
-          background-color: $color-skeleton-secondary-shade;
-          margin-bottom: 20px;
-        }
-        &__paragraph-line {
-          height: 20px;
+        aspect-ratio: 3 / 4;
+        border-radius: 25px;
+    }
+    > .media-card__title{
+      width: 70%;
+      height: 20px;
+      border-radius: 6px;
+    }
+  }
+  &.featured-media {
+    > .featured-media__banner {
+      width: 100%;
+      aspect-ratio: 15 / 8;
+      border-radius: 25px;
+    }
+  }
+  &.episode-card {
+    &__banner{}
+    &__title{}
+  }
+  &.movies-details {
+    &__header {
+      width: 100%;
+      height: 100%;
+      background-color: $color-skeleton-primary-shade;
+      border-radius: 20px;
+      position: relative;
+      &__movie {
+        position: absolute;
+        bottom: -50px;
+        z-index: 4;
+        width: 60%;
+        max-width: 1000px;
+        min-width: 350px;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        &__poster {
           width: 100%;
-          border-radius: 6px;
+          aspect-ratio: 1 / 1.5;
           background-color: $color-skeleton-secondary-shade;
-          margin: 10px 0px;
-
-          &:last-of-type {
-            width: 60%;
+          border-radius: 20px;
+        }
+        &__info {
+          width: 100%;
+          &__title {
+            height: 40px;
+            width: 80%;
+            border-radius: 10px;
+            background-color: $color-skeleton-secondary-shade;
+            margin-bottom: 20px;
+          }
+          &__paragraph-line {
+            height: 20px;
+            width: 100%;
+            border-radius: 6px;
+            background-color: $color-skeleton-secondary-shade;
+            margin: 10px 0;
+            &:last-of-type {
+              width: 60%;
+            }
           }
         }
       }
     }
+  }
+  &.article-placeholder {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    > .article-placeholder__banner{
+      display: block;
+      width: 100%;
+      aspect-ratio: 15 / 9;
+      border: 15px;
+      border-radius: 15px;
+    }
+    > .article-placeholder__line {
+      width: 70%;
+      height: 20px;
+      border-radius: 6px;
+    }
+  }
+  &.featured-article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    > .featured-article__banner {
+      width: 100%;
+      aspect-ratio: 15 / 9;
+      border-radius: 20px;
+    }
+    > .featured-article__text {
+      background: unset;
+      animation: unset;
+      .featured-article__text__heading {
+        width: 100%;
+        height: 30px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+      }
+      .featured-article__text__p {
+        width: 100%;
+        height: 15px;
+        border-radius: 3px;
+        opacity: 0.6;
+        margin-bottom: 6px;
+        &:last-of-type {
+          width: 60%;
+        }
+      }
+    }
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 350px 0;
   }
 }

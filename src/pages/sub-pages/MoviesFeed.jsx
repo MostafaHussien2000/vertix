@@ -15,6 +15,7 @@ import {
 import Loader from "../../components/loaders/Loader";
 import ErrorMessage from "../../components/ErrorMessage";
 import MediaCard from "../../components/MediaCard";
+import Skeleton from "../../components/loaders/Skeleton";
 
 function MoviesFeed() {
     const [popular, setPopular] = useState({
@@ -58,7 +59,7 @@ function MoviesFeed() {
         <>
             {
                 nowPlaying.loading ?
-                    <Loader/> :
+                    <Skeleton type={"featuredMedia"} /> :
                     nowPlaying.error ?
                         <ErrorMessage></ErrorMessage> :
                         <Carousel mediaType={"movie"} items={nowPlaying.data.slice(0, 5)}/>
@@ -67,9 +68,14 @@ function MoviesFeed() {
                 <h1 className={"feed__category__heading"}>Popular Movies</h1>
                 {
                     popular.loading ?
-                        <center>
-                            <Loader/>
-                        </center> :
+                        (
+                            <div className={"feed__category__items"}>
+                                <Skeleton type={"mediaCard"} />
+                                <Skeleton type={"mediaCard"} />
+                                <Skeleton type={"mediaCard"} />
+                                <Skeleton type={"mediaCard"} />
+                            </div>
+                        ):
                         popular.error ?
                             <ErrorMessage></ErrorMessage> :
                             (
@@ -96,9 +102,14 @@ function MoviesFeed() {
                 <h1 className={"feed__category__heading"}>Top Rated Movies</h1>
                 {
                     topRated.loading ?
-                        <center>
-                            <Loader/>
-                        </center> :
+                       (
+                           <div className={"feed__category__items"}>
+                               <Skeleton type={"mediaCard"} />
+                               <Skeleton type={"mediaCard"} />
+                               <Skeleton type={"mediaCard"} />
+                               <Skeleton type={"mediaCard"} />
+                           </div>
+                       ):
                         topRated.error ?
                             <ErrorMessage></ErrorMessage> :
                             (
