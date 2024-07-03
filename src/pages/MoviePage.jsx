@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 /* React Icons
 ============== */
-import {TbArrowNarrowLeft, TbPlus} from "react-icons/tb";
+import {TbArrowNarrowLeft, TbPlus, TbTrash} from "react-icons/tb";
 import { FaImdb } from "react-icons/fa";
 import { PiTimerBold } from "react-icons/pi";
 /* API URLs
@@ -20,18 +20,21 @@ import Loader from "../components/loaders/Loader";
 import MediaCard from "../components/MediaCard";
 import ReviewCard from "../components/ReviewCard";
 import Skeleton from "../components/loaders/Skeleton";
+import RequestLoader from "../components/RequestLoader";
 /* SLick Slider
 =============== */
 import Slider from "react-slick";
 /* React Router DOM
 =================== */
 import {Link, useParams} from "react-router-dom";
+/* Firebase Functions
+===================== */
+import {addMediaToWatchList, isItemInWatchList, removeMediaFromWatchList} from "../api/firebase-functions";
+/* Auth
+======= */
+import {useAuth} from "../context/AuthContext";
 
 function MoviePage() {
-
-  return <Skeleton type={"moviePage"} />
-
-  // Test Movie ID: 882059
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -46,10 +49,12 @@ function MoviePage() {
     error: ""
   })
 
-  const [loadingBackdropImage, setLoadingBackdropImage] = useState(true)
+  const [loadingBackdropImage, setLoadingBackdropImage] = useState(true);
 
 
   const {id: movieId} = useParams()
+
+  const {currentUser} = useAuth();
 
   useEffect(() => {
     fetch(getMovieDataURL(movieId), options())
@@ -113,9 +118,9 @@ function MoviePage() {
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 670,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
         }
       },
@@ -128,6 +133,22 @@ function MoviePage() {
       }
     ]
   };
+
+  const addToWatchlist = async () => {
+    try {
+      await addMediaToWatchList(currentUser.uid, movieId, "movies");
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  const removeFromWatchList = async () => {
+    console.log("removing from watchlist...")
+    try {
+      await removeMediaFromWatchList(currentUser.uid, movieId, "movies")
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
 
   if (error) return <p>Something went wrong!</p>;
@@ -180,10 +201,7 @@ function MoviePage() {
               </p>
             </div>
             <div className="movie-page__header__movie__info__actions">
-              <button>
-                <TbPlus />
-                To Watchlist
-              </button>
+              <WatchlistActionButton userId={currentUser?.uid} mediaId={movieId} mediaType={"movies"}/>
             </div>
           </div>
         </div>
@@ -247,3 +265,83 @@ function MoviePage() {
 }
 
 export default MoviePage;
+
+function WatchlistActionButton ({userId, mediaId, mediaType}) {
+  const [btnState, setBtnState] = useState(false);
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    const checkWatchlist = async () => {
+      try {
+        const state = await isItemInWatchList(userId, mediaId, mediaType);
+        setBtnState(state);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    checkWatchlist()
+
+    return () => {
+    };
+  }, [])
+  const addToWatchlist = async () => {
+    setLoading(true)
+    try {
+      await addMediaToWatchList(userId, mediaId, mediaType);
+      setBtnState(true);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false)
+    }
+  }
+  const removeFromWatchList = async () => {
+    setLoading(true)
+    try {
+      await removeMediaFromWatchList(userId, mediaId, mediaType)
+      setBtnState(false);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false)
+    }
+  }
+  return (
+      <>
+        {
+          btnState ? (
+              <button className={`btn-danger ${loading ? "disabled-btn" : ""}`} onClick={removeFromWatchList}>
+                {
+                  loading ? (
+                      <>
+                        <RequestLoader />
+                        Removing Movie From Watchlist ...
+                      </>
+                  ) : (
+                      <>
+                        <TbTrash />
+                        Remove From Watchlist
+                      </>
+                  )
+                }
+              </button>
+          ) : (
+              <button className={`${loading ? "disabled-btn" : ""}`} onClick={addToWatchlist}>
+                {
+                  loading ? (
+                      <>
+                        <RequestLoader />
+                        Adding Movie To Watchlist ...
+                      </>
+                  ) : (
+                      <>
+                        <TbPlus/>
+                        To Watchlist
+                      </>
+                  )
+                }
+              </button>
+          )
+        }
+      </>
+  )
+}

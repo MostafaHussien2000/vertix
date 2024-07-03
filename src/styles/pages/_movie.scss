@@ -213,8 +213,8 @@
           button {
             background-color: $color-accent;
             font-size: $font-size-regular;
-            padding: 0px 25px;
-            transition: background 0.2s ease;
+            padding: 0 25px;
+            transition: background 0.2s ease, opacity 0.2s ease;
             height: 55px;
             border-radius: 40px;
             border: none;
@@ -226,6 +226,16 @@
             gap: 8px;
             &:hover {
               background-color: $color-accent-hover;
+            }
+            &.btn-danger {
+              background: $color-danger;
+              &:hover {
+                background: $color-danger-hover;
+              }
+            }
+            &.disabled-btn {
+              opacity: 0.6;
+              pointer-events: none;
             }
           }
         }

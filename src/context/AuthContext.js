@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
     const defaultPhotoURL = "https://th.bing.com/th/id/OIP.jV9zPKA_1wFbypI2A2sBywAAAA?w=300&h=300&rs=1&pid=ImgDetMain"
     const response = await createUserWithEmailAndPassword(auth, email, password);
     return await setDoc(doc(db, "users", response?.user?.uid), {
-      fullName, email, createdAt: serverTimestamp(), watchlist: {movies: [], tv: []}, saved_articles: [], photoURL: defaultPhotoURL
+      fullName, email, createdAt: serverTimestamp(), moviesList: [], seriesList: [], saved_articles: [], photoURL: defaultPhotoURL
     })
   }
 
